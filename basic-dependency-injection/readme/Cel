@@ -1,0 +1,29 @@
+Repozytorium użytkowników będące komponentem opartym o komponent logowania.
+
+API: interfejsy 
+DOMAIN: klasy typu user (modele?)
+IMPLEMENTATIONS: implementacje interfejsów
+SPRING_TUTORIAL: klasa Main z metodą main
+
+
+
+1. Najpierw stworzyłem interfejsy UsersRepository (potrzebna była klasa User).
+2. Potem interfejs Logger z metodą log.
+3. Następnie stworzyłem implementację UsersRepository w oddzielnej paczce.
+4. Dalej stworzyłem implementację Logger w tej paczce (metodę log).
+5. Implementacja metody setLogger w implementacji UsersRepositoryImpl
+6. Utworzyłem klasę Main i stworzyłem loggera, następnie UsersRepositiorium, ustawiłem w nim loggera
+7. Stworzyłem użytkownika w klasie Main (w usersRepositorium)
+8. Stworzyłem klasę MainSpring:
+	-konfiguracja springa w XML-u (w src/main/resources) - new spring bean definition file -> select 
+	 desired XSD namespace declarations (beans) tagi opisane w plikach XSD
+	-w pliku konfiguracyjnym: chcemy powiedzieć, że w naszym programie będzie komponent (bean)
+	 który będzie klasy LoggerImpl (tagi bean w konfiguracja.xml). To samo robię dla komponentu UsersRepositoryImpl.
+	 Jest to odpowiednik stworzenia obiektów klasy LoggerImpl i UsersRepositoryImpl w klasie Main.
+	 Wewnątrz tagu "bean" możemy dodać tag "property", w którym podamy właściwości klasy (pola klasy)
+	 oraz referencję do obiektu naszej klasy (odpowiednik repozytoiriumUzytkownikw.setLogger(mojLogger).
+	-w pliku MainSpring chcemy wczytać konfigurację, którą stworzyliśmy (uruchamiamy kontekst aplikacji).
+	 Kontekst tworzymy podając ścieżkę do pliku XML z konfiguracją.
+	-teraz z kontekstu mogę pobrać sobie jakiegoś beana po jego ID. (w konfiguracji tworzymy bean-y, czyli komponenty
+	 <obiekty>, ustawiając properties i wskazując zależności pomiędzy komponentami. Beany możemy potem pobierać i z nich 
+	 korzystać (wstrzykiwać) w programie. Na tym polega dependency injection.
